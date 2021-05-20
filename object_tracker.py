@@ -217,17 +217,6 @@ def main(_argv):
         vid = cv2.VideoCapture(video_path)
 
     output_video_1 = None
-    
-    # get video ready to save locally if flag is set
-    if FLAGS.output:
-        # by default VideoCapture returns float instead of int
-        """
-        width = int(vid.get(cv2.CAP_PROP_FRAME_WIDTH))
-        height = int(vid.get(cv2.CAP_PROP_FRAME_HEIGHT))
-        """
-        fps = int(vid.get(cv2.CAP_PROP_FPS))
-        codec = cv2.VideoWriter_fourcc(*FLAGS.output_format)
-        out = cv2.VideoWriter(FLAGS.output, codec, fps, (1920, 1080))
 
     frame_num = 0
     # while video is running
@@ -535,71 +524,6 @@ def main(_argv):
                 2,
             )
 
-            ####################
-            
-            # cv2.putText(
-            #     frame,
-            #     track.has_mask,
-            #     (int(bbox[0]), int(bbox[1] - 10)),
-            #     0,
-            #     0.75,
-            #     (255, 255, 255),
-            #     2,
-            # )
-            #####################
-            
-            # cv2.putText(
-            #     frame,
-            #     f"{track.bbox[0][0]},{track.bbox[0][1]}",
-            #     (int(bbox[0]), int(bbox[1] - 10)),
-            #     0,
-            #     0.75,
-            #     (255, 255, 255),
-            #     2,
-            # )
-
-            # cv2.putText(
-            #     bird_view_img,
-            #     f"Count:{people_counter}",
-            #     (20, 20),
-            #     0,
-            #     0.75,
-            #     (255, 255, 255),
-            #     2,
-            # )
-
-            # # cv2.putText(
-            # #     bird_view_img,
-            # #     "{}".format(track.val),
-            # #     (int(new_bbox[0][0]+7),int(new_bbox[0][1])+7),
-            # #     0,
-            # #     0.75,
-            # #     (255, 255, 255),
-            # #     2,
-            # # )
-
-            # cv2.putText(
-            #     bird_view_img,
-            #     "Coord1:{:.3f},{:.3f}".format(int(transformed_lines[0][0]),int(transformed_lines[0][1])),
-            #     (30, 30),
-            #     0,
-            #     0.75,
-            #     (255, 255, 255),
-            #     2,
-            # )
-
-            # cv2.putText(
-            #     bird_view_img,
-            #     "Coord2:{:.3f},{:.3f}".format(int(transformed_lines[1][0]),int(transformed_lines[1][1])),
-            #     (1000, 1000),
-            #     0,
-            #     0.75,
-            #     (255, 255, 255),
-            #     2,
-            # )
-
-            # if enable info flag then print details about each track
-
         # calculate frames per second of running detections
         fps = 1.0 / (time.time() - start_time)
         print("FPS: %.2f" % fps)
@@ -609,7 +533,7 @@ def main(_argv):
             if output_video_1 is None:
                 fourcc1 = cv2.VideoWriter_fourcc(*"MJPG")
                 output_video_1 = cv2.VideoWriter(
-                    "./video.avi", fourcc1, 25, (frame.shape[1], frame.shape[0]), True
+                    FLAGS.output, fourcc1, 25, (frame.shape[1], frame.shape[0]), True
                 )
 
             elif output_video_1 is not None:
