@@ -1,0 +1,23 @@
+image_parameters:
+  img_path: ./static_frame_from_video.jpg
+  l1:
+  - 25
+  - 618
+  l2:
+  - 1426
+  - 542
+  p1:
+  - 8
+  - 1052
+  p2:
+  - 38
+  - 277
+  p3:
+  - 1892
+  - 1051
+  p4:
+  - 1196
+  - 289
+  size_height: 1080
+  size_width: 1920
+
